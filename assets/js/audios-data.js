@@ -12,13 +12,13 @@
 
 const CONFIG = {
   nomeCofre: "Cofre",
-  tagline: "30 Técnicas de Autoterapia",
+  tagline: "50 Técnicas de Autoterapia",
   introducao:
-    "Um compilado exclusivo com 30 técnicas de autoterapia em áudio, liberado ao vivo na formatura para quem completou as 15 ativações da campanha. Ouça quando quiser ou baixe para levar com você.",
-  metaTotal: 30,
+    "Um compilado exclusivo com 50 técnicas de autoterapia em áudio, liberado ao vivo na formatura para quem completou as 15 ativações da campanha. Ouça quando quiser ou baixe para levar com você.",
+  metaTotal: 50,
 };
 
-const AUDIOS = Array.from({ length: 30 }, (_, i) => {
+const AUDIOS = Array.from({ length: 50 }, (_, i) => {
   const numero = String(i + 1).padStart(2, "0");
   return {
     id: `audio-${numero}`,

@@ -1,6 +1,6 @@
-# Cofre — 30 Técnicas de Autoterapia
+# Cofre — 50 Técnicas de Autoterapia
 
-Interface web estática para os alunos ouvirem ou baixarem o compilado de 30 áudios de autoterapia, liberado ao vivo na formatura para quem completou as 15 ativações da campanha.
+Interface web estática para os alunos ouvirem ou baixarem o compilado de 50 áudios de autoterapia, liberado ao vivo na formatura para quem completou as 15 ativações da campanha.
 
 Sem login: o acesso é feito por link privado/não listado (compartilhado com os alunos elegíveis).
 
@@ -9,7 +9,7 @@ Sem login: o acesso é feito por link privado/não listado (compartilhado com os
 ```
 index.html                    página principal
 assets/css/style.css          estilos
-assets/js/audios-data.js      configuração e lista dos 30 áudios (EDITAR AQUI)
+assets/js/audios-data.js      configuração e lista dos 50 áudios (EDITAR AQUI)
 assets/js/app.js              lógica do player, progresso e busca
 audios/                       pasta sugerida para os arquivos .mp3
 ```
@@ -35,7 +35,7 @@ Enquanto `arquivo` estiver vazio (`""`), o card aparece com a marcação "Em bre
 
 - Player único (ao tocar um áudio, qualquer outro em reprodução é pausado).
 - Download direto de cada áudio.
-- Progresso "X de 30 ouvidos" salvo no navegador do próprio aluno (localStorage) — não é sincronizado entre dispositivos nem enviado a nenhum servidor.
+- Progresso "X de 50 ouvidos" salvo no navegador do próprio aluno (localStorage) — não é sincronizado entre dispositivos nem enviado a nenhum servidor.
 - Busca por nome da técnica.
 - Layout responsivo (funciona bem em celular, onde a maioria dos alunos vai acessar via WhatsApp).
 
