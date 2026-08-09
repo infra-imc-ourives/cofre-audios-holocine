@@ -11,25 +11,20 @@ index.html                    página principal
 assets/css/style.css          estilos
 assets/js/audios-data.js      configuração e lista dos 50 áudios (EDITAR AQUI)
 assets/js/app.js              lógica do player, progresso e busca
-audios/                       pasta sugerida para os arquivos .mp3
+audios/                       pasta opcional, caso algum áudio seja hospedado localmente no futuro
 ```
 
-## Como adicionar os áudios reais
+## Áudios
 
-Abra `assets/js/audios-data.js`:
+Os 50 áudios reais já estão configurados em `assets/js/audios-data.js`, apontando para a pasta "AUDIOS COFRE" no Google Drive, no formato de link de download direto:
 
-1. Em `CONFIG`, ajuste os textos gerais (nome do cofre, tagline, introdução) se quiser.
-2. Em cada item de `AUDIOS`, preencha:
-   - `titulo`: nome da técnica (ex: "Respiração Consciente")
-   - `descricao`: opcional
-   - `duracao`: opcional (ex: "08:32")
-   - `arquivo`: caminho do arquivo ou URL completa. Duas opções:
-     - Arquivo local: coloque o `.mp3` dentro de `audios/` e use `audios/01-respiracao-consciente.mp3`
-     - URL externa (S3, CDN, Google Drive com link direto, etc.): use a URL completa, ex. `https://minha-cdn.com/01.mp3`
+```
+https://drive.google.com/uc?export=download&id=ID_DO_ARQUIVO
+```
 
-Enquanto `arquivo` estiver vazio (`""`), o card aparece com a marcação "Em breve" e os botões de ouvir/baixar ficam desativados — não precisa remover nem comentar nada.
+> **Importante:** esse formato de link do Drive funciona bem para a maioria dos arquivos, mas o Google pode exibir uma página de confirmação ("não foi possível verificar vírus") em vez do áudio direto — principalmente em arquivos maiores ou após muitos downloads do mesmo arquivo. **Teste os 50 links num navegador comum (fora deste ambiente) antes de divulgar o link aos alunos.** Se algum link específico não tocar/baixar direto, a solução mais robusta é mover esse arquivo (ou todos) para um serviço pensado para hospedar arquivos públicos grandes (ex: Cloudflare R2, Backblaze B2, Bunny.net) e trocar apenas o valor de `arquivo` correspondente — o resto da página não precisa mudar.
 
-> Atenção com links do Google Drive: o link de compartilhamento padrão (`.../file/d/ID/view`) não funciona direto em `<audio>`/download. É necessário um link de download direto ou hospedar os arquivos em outro serviço (CDN, bucket público, etc.).
+Para editar título, descrição, duração ou arquivo de qualquer técnica, ou adicionar/remover itens, edite o array `AUDIOS` em `assets/js/audios-data.js`. Enquanto `arquivo` estiver vazio (`""`), o card aparece com a marcação "Em breve" e os botões de ouvir/baixar ficam desativados.
 
 ## Funcionalidades
 

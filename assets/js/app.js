@@ -103,7 +103,7 @@
     card.innerHTML = `
       <div class="card__number">${audioItem.numero}</div>
       <div class="card__body">
-        <p class="card__title">${audioItem.titulo}</p>
+        <p class="card__title" title="${audioItem.titulo}">${audioItem.titulo}</p>
         <p class="card__meta">${meta || "&nbsp;"}</p>
       </div>
       <div class="card__actions">
