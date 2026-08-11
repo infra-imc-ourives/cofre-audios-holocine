@@ -47,8 +47,11 @@
   </footer>
 
   <div class="player-bar" id="player-bar">
-    <span class="player-bar__info" id="player-bar-title">—</span>
-    <audio id="player-audio" controls preload="none"></audio>
+    <div class="player-bar__header">
+      <span class="player-bar__info" id="player-bar-title">—</span>
+      <button class="player-bar__close" id="player-bar-close" type="button" aria-label="Fechar player">✕</button>
+    </div>
+    <iframe class="player-bar__frame" id="player-frame" src="about:blank" allow="autoplay" title="Player de áudio"></iframe>
   </div>
 
   <script src="assets/js/audios-data.js"></script>

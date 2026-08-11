@@ -14,8 +14,11 @@
   const progressCount = document.getElementById("progress-count");
   const progressPercent = document.getElementById("progress-percent");
   const playerBar = document.getElementById("player-bar");
-  const playerAudio = document.getElementById("player-audio");
+  const playerFrame = document.getElementById("player-frame");
   const playerBarTitle = document.getElementById("player-bar-title");
+  const playerBarClose = document.getElementById("player-bar-close");
+
+  let activeId = null;
 
   document.getElementById("hero-title").textContent = CONFIG.nomeCofre;
   document.getElementById("hero-tagline").textContent = CONFIG.tagline;
@@ -54,8 +57,8 @@
   }
 
   function pararPlayer() {
-    playerAudio.pause();
-    playerAudio.removeAttribute("src");
+    activeId = null;
+    playerFrame.src = "about:blank";
     playerBar.classList.remove("is-active");
     grid.querySelectorAll(".icon-btn--play.is-playing").forEach((btn) => {
       btn.classList.remove("is-playing");
@@ -64,29 +67,23 @@
   }
 
   function tocar(audioItem, btn) {
-    const jaTocando = playerAudio.dataset.currentId === audioItem.id && !playerAudio.paused;
-    if (jaTocando) {
+    if (activeId === audioItem.id) {
       pararPlayer();
       return;
     }
 
     pararPlayer();
-    playerAudio.src = audioItem.arquivo;
-    playerAudio.dataset.currentId = audioItem.id;
+    activeId = audioItem.id;
+    playerFrame.src = audioItem.streamUrl;
     playerBarTitle.textContent = audioItem.titulo;
     playerBar.classList.add("is-active");
-    playerAudio.play().catch(() => {});
     btn.classList.add("is-playing");
     btn.innerHTML = ICONS.pause;
 
-    playerAudio.onended = () => {
-      marcarComoOuvido(audioItem.id);
-      pararPlayer();
-    };
-    playerAudio.ontimeupdate = () => {
-      if (playerAudio.currentTime > 5) marcarComoOuvido(audioItem.id);
-    };
+    marcarComoOuvido(audioItem.id);
   }
+
+  playerBarClose.addEventListener("click", pararPlayer);
 
   function criarCard(audioItem) {
     const temArquivo = Boolean(audioItem.arquivo);

@@ -23,6 +23,10 @@ function driveUrl(id) {
   return `https://drive.google.com/uc?export=download&id=${id}`;
 }
 
+function drivePreviewUrl(id) {
+  return `https://drive.google.com/file/d/${id}/preview`;
+}
+
 const AUDIOS = [
   { titulo: "Técnica Holográfica do Sonho Realizado", driveId: "1Z9Szx-0BHsjw-WAwQ42M4Hk7IDd0dc0k" },
   { titulo: "Técnica Holográfica da Imagem da sua Cocriação", driveId: "1IvaCKFWhsEJkyk08Vnac0epISB7puzaQ" },
@@ -83,5 +87,6 @@ const AUDIOS = [
     descricao: "",
     duracao: "",
     arquivo: driveUrl(item.driveId),
+    streamUrl: drivePreviewUrl(item.driveId),
   };
 });
