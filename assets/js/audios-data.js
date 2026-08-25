@@ -1,20 +1,22 @@
 /*
  * Configuração do Cofre de Áudios.
  *
- * Os 30 áudios estão hospedados no Google Drive (pasta "AUDIOS COFRE").
- * O campo "arquivo" usa o link de download direto do Drive:
- *   https://drive.google.com/uc?export=download&id=ID_DO_ARQUIVO
- * O campo "streamUrl" usa o preview de áudio embutido do Drive (iframe),
- * usado para o botão "ouvir" tocar dentro da própria página.
+ * A maioria dos 30 áudios está hospedada no Google Drive (pasta "AUDIOS
+ * COFRE"): basta preencher "driveId" com o ID do arquivo no Drive.
+ *   - "arquivo" usa o link de download direto do Drive.
+ *   - "streamUrl" usa o preview de áudio embutido do Drive (iframe), usado
+ *     pelo botão "ouvir" para tocar dentro da própria página.
  *
- * A técnica 02 não está na pasta do Drive no momento — o item fica marcado
- * como "Em breve" até o arquivo ser adicionado. Para preencher, defina
- * driveId com o ID do arquivo no Drive.
+ * Um item pode, alternativamente, usar "localFile" (caminho de um .mp3
+ * dentro da pasta audios/, versionado neste repositório) em vez de
+ * "driveId" — nesse caso o áudio toca com o player nativo do navegador
+ * (mais simples e sem depender do Drive). É o caso da técnica 02.
  *
- * Se algum áudio específico não tocar/baixar direto (o Google Drive às vezes
- * exibe uma página de confirmação para arquivos maiores), mova esse arquivo
- * para outro host (CDN, bucket público, etc.) e troque só o valor de
- * "arquivo"/"streamUrl" pela nova URL — o restante da página não precisa mudar.
+ * Se algum áudio hospedado no Drive não tocar/baixar direto (o Google
+ * pode exibir uma página de confirmação para arquivos maiores), mova esse
+ * arquivo para audios/ (usando "localFile") ou outro host (CDN, bucket
+ * público, etc.) e troque só esse item — o restante da página não precisa
+ * mudar.
  */
 
 const CONFIG = {
@@ -35,7 +37,7 @@ function drivePreviewUrl(id) {
 
 const AUDIOS = [
   { titulo: "Técnica Holográfica do Sonho Realizado", driveId: "1Z9Szx-0BHsjw-WAwQ42M4Hk7IDd0dc0k" },
-  { titulo: "Técnica 02", driveId: "" },
+  { titulo: "Técnica Holográfica da Imagem da sua Cocriação", localFile: "audios/02-tecnica-holografica-da-imagem-da-sua-cocriacao.mp3" },
   { titulo: "Técnica de Visualização Detalhada da Imagem do teu Sonho Realizado", driveId: "1CTiD8ROCwep9awP4Gq2ICtlvfQD_0b6r" },
   { titulo: "Técnica Especial de Visualização Holográfica da Materialização dos seus Sonhos", driveId: "1DbkpYuxJNKbPjIZtLoBZqAy7vEj3VWbC" },
   { titulo: "Mapeamento da Nova Consciência Neural", driveId: "1TR73zEAGlSf2X88xNKNJDQskE_kLoSTO" },
@@ -66,13 +68,15 @@ const AUDIOS = [
   { titulo: "Decretos de Ativação de Ordem para Manifestar Todos os teus Sonhos", driveId: "1S7mbddMgHmkoieeVushI5LuGYsjpQ_TR" },
 ].map((item, i) => {
   const numero = String(i + 1).padStart(2, "0");
+  const local = Boolean(item.localFile);
   return {
     id: `audio-${numero}`,
     numero,
     titulo: item.titulo,
     descricao: "",
     duracao: "",
-    arquivo: driveUrl(item.driveId),
-    streamUrl: drivePreviewUrl(item.driveId),
+    arquivo: local ? item.localFile : driveUrl(item.driveId),
+    streamUrl: local ? item.localFile : drivePreviewUrl(item.driveId),
+    nativo: local,
   };
 });

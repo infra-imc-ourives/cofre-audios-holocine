@@ -15,6 +15,7 @@
   const progressPercent = document.getElementById("progress-percent");
   const playerBar = document.getElementById("player-bar");
   const playerFrame = document.getElementById("player-frame");
+  const playerAudio = document.getElementById("player-audio");
   const playerBarTitle = document.getElementById("player-bar-title");
   const playerBarClose = document.getElementById("player-bar-close");
 
@@ -59,6 +60,8 @@
   function pararPlayer() {
     activeId = null;
     playerFrame.src = "about:blank";
+    playerAudio.pause();
+    playerAudio.removeAttribute("src");
     playerBar.classList.remove("is-active");
     grid.querySelectorAll(".icon-btn--play.is-playing").forEach((btn) => {
       btn.classList.remove("is-playing");
@@ -74,8 +77,20 @@
 
     pararPlayer();
     activeId = audioItem.id;
-    playerFrame.src = audioItem.streamUrl;
     playerBarTitle.textContent = audioItem.titulo;
+
+    if (audioItem.nativo) {
+      playerFrame.classList.add("is-hidden");
+      playerAudio.classList.remove("is-hidden");
+      playerAudio.src = audioItem.streamUrl;
+      playerAudio.play().catch(() => {});
+      playerAudio.onended = pararPlayer;
+    } else {
+      playerAudio.classList.add("is-hidden");
+      playerFrame.classList.remove("is-hidden");
+      playerFrame.src = audioItem.streamUrl;
+    }
+
     playerBar.classList.add("is-active");
     btn.classList.add("is-playing");
     btn.innerHTML = ICONS.pause;

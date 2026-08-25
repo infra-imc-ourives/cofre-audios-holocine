@@ -335,6 +335,16 @@ a {
   background: #000;
 }
 
+.player-bar__audio {
+  width: 100%;
+  height: 40px;
+}
+
+.player-bar__frame.is-hidden,
+.player-bar__audio.is-hidden {
+  display: none;
+}
+
 footer {
   text-align: center;
   color: var(--text-faint);
